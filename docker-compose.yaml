@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    image: ghcr.io/eendcode/damn-vulnerable-python-app
+    ports:
+      - "8000:5000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=${DYNAMIC_PASS}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - workshop-net
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_PASSWORD=${DYNAMIC_PASS}
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - workshop-net
+
+networks:
+  workshop-net:
+    driver: bridge
