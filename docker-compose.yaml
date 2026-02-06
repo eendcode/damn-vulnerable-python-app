@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   app:
-    image: ghcr.io/eendcode/damn-vulnerable-python-app
+    image: ghcr.io/eendcode/damn-vulnerable-python-app:main
     ports:
       - "8000:5000"
     environment:
       - DB_HOST=db
       - DB_NAME=postgres
       - DB_USER=postgres
-      - DB_PASS=${DYNAMIC_PASS}
+      - DB_PASS=mysupersecretpassword
     depends_on:
       db:
         condition: service_healthy
@@ -19,7 +19,7 @@ services:
   db:
     image: postgres:15-alpine
     environment:
-      - POSTGRES_PASSWORD=${DYNAMIC_PASS}
+      - POSTGRES_PASSWORD=mysupersecretpassword
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:

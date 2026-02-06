@@ -1,4 +1,3 @@
--- 1. Create the primary users table
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
@@ -6,11 +5,10 @@ CREATE TABLE IF NOT EXISTS users (
     bio TEXT
 );
 
--- 2. Create a "hidden" table with sensitive info for exfiltration
 CREATE TABLE IF NOT EXISTS flags (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100),
-    value VARCHAR(255),
+    value VARCHAR(255)
 );
 
 INSERT INTO users (username, role, bio) VALUES 
