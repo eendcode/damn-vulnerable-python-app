@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS flags (
 INSERT INTO users (username, role, bio) VALUES 
 ('admin', 'superuser', 'System administrator. I like long walks and securing servers.'),
 ('alice', 'developer', 'Full-stack dev. Don''t ask me about CSS.'),
-('bob', 'hr_manager', 'I handle the people stuff. Please stop pining the database.')
+('bob', 'hr_manager', 'I handle the people stuff. Please stop pining the database.'),
 ('andy', 'scrum_master', 'I am perfection');
 
 INSERT INTO flags (name, value) VALUES 
